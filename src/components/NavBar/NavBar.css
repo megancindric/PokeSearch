@@ -1,0 +1,44 @@
+ul {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+  }
+  
+  li {
+    font-size: 1.25rem;
+  }
+  
+  .navBar {
+    background: #001d3d;
+    box-shadow: 4px 2px 5px gray;
+    color: white;
+    margin-bottom: 2rem;
+    padding: 1.5rem 2rem;
+  }
+  
+  .navBar button {
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 0.4rem 0.5rem;
+    border-radius: 8px;
+  }
+  
+  .navBar button:hover {
+    background: white;
+    color: #001d3d;
+    cursor: pointer;
+  }
+  
+  .brand {
+    cursor: pointer;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+li button {
+    font-size: large;
+    font-weight: bold;
+}

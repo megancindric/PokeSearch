@@ -1,0 +1,10 @@
+.resultsList {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
+
+Link {
+    text-decoration: none;
+}
