@@ -9,7 +9,9 @@
   padding: 0;
   box-sizing: inherit;
 }
-
+.custom_font {
+  font-family: 'Chakra Petch', sans-serif;
+}
 
 html {
   box-sizing: border-box;
