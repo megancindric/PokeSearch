@@ -1,15 +1,15 @@
 import React from "react";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ResultsList from "../../components/ResultsList/ResultsList";
 import "./SearchPage.css";
 import axios from "axios";
 
-const SearchPage = () => {
+const SearchPage = ({ Dex }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  const fetchPokemon = async () => {
+  const searchPokemon = async () => {
     try {
       let lowerCaseSearchTerm = searchTerm.toLowerCase();
       let response = await axios.get(
@@ -17,14 +17,26 @@ const SearchPage = () => {
       );
       setSearchResults(response.data.pokemon);
     } catch (error) {
-      console.log("Error in fetchPokemon request", error);
+      console.log("Error in searchPokemon request", error);
+    }
+  };
+
+  const getAllPokemon = async () => {
+    try {
+      let response = await Dex.getPokemonSpeciesList();
+      setSearchResults(response.results);
+    } catch (error) {
+      console.log("Error in getAllPokemon Request: ", error);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchPokemon();
+    searchPokemon();
   };
+  useEffect(() => {
+    getAllPokemon();
+  }, []);
 
   return (
     <div className="container search font-bold">
@@ -34,7 +46,7 @@ const SearchPage = () => {
         setSearchTerm={setSearchTerm}
         handleSubmit={handleSubmit}
       />
-      <ResultsList searchResults={searchResults} />
+      <ResultsList searchResults={searchResults} searchTerm={searchTerm} />
     </div>
   );
 };

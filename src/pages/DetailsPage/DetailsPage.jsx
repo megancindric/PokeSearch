@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-const DetailsPage = () => {
+const DetailsPage = ({ Dex }) => {
   const { pokeName } = useParams();
   const [pokeDetails, setPokeDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const Pokedex = require("pokeapi-js-wrapper");
-  const P = new Pokedex.Pokedex();
   useEffect(() => {
     fetchPokemonDetails();
   }, []);
   const fetchPokemonDetails = async () => {
     try {
       //Make axios request
-      let response = await P.getPokemonByName(pokeName);
+      let response = await Dex.getPokemonByName(pokeName);
       setPokeDetails(response);
       setIsLoading(false);
     } catch (error) {
