@@ -21,7 +21,9 @@ const DetailsPage = ({ Dex }) => {
 
   return (
     <div className=" font-bold flex flex-col justify-center items-center text-xl">
-      <h1 className=" text-5xl">{pokeName}'s details</h1>
+      <h1 className=" text-5xl">
+        #{pokeDetails.id} {pokeName}
+      </h1>
       {isLoading ? (
         <div>Loading...</div>
       ) : (
@@ -39,6 +41,7 @@ const DetailsPage = ({ Dex }) => {
           {/* <img
             src={pokeDetails.sprites.other["official-artwork"].front_shiny}
           /> */}
+
           <h3>Height: {pokeDetails.height}</h3>
           <h3>Weight: {pokeDetails.weight}</h3>
           <h3 className="text-3xl">Type:</h3>
@@ -51,6 +54,12 @@ const DetailsPage = ({ Dex }) => {
           <ul className="flex flex-col">
             {pokeDetails.abilities.map((ability) => (
               <li key={ability.slot}>{ability.ability.name}</li>
+            ))}
+          </ul>
+          <h3 className="text-3xl">Moves:</h3>
+          <ul className="flex flex-col">
+            {pokeDetails.moves.map((move, index) => (
+              <li key={index}>{move.move.name}</li>
             ))}
           </ul>
         </div>
