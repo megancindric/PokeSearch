@@ -27,8 +27,8 @@ const SearchPage = () => {
   };
 
   return (
-    <div className="container search">
-      <h1>Search Page!</h1>
+    <div className="container search font-bold">
+      <h1 className=" text-5xl">Search the Dex</h1>
       <SearchBar
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}

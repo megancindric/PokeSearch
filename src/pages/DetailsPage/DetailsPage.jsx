@@ -5,18 +5,16 @@ const DetailsPage = () => {
   const { pokeName } = useParams();
   const [pokeDetails, setPokeDetails] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-
+  const Pokedex = require("pokeapi-js-wrapper");
+  const P = new Pokedex.Pokedex();
   useEffect(() => {
     fetchPokemonDetails();
   }, []);
   const fetchPokemonDetails = async () => {
     try {
       //Make axios request
-      let response = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${pokeName}`
-      );
-      setPokeDetails(response.data);
-
+      let response = await P.getPokemonByName(pokeName);
+      setPokeDetails(response);
       setIsLoading(false);
     } catch (error) {
       console.log("Error in fetchPokemonDetails:", error);
@@ -24,28 +22,35 @@ const DetailsPage = () => {
   };
 
   return (
-    <div className="container">
-      <h1>{pokeName}'s Details!</h1>
+    <div className=" font-bold flex flex-col justify-center items-center text-xl">
+      <h1 className=" text-5xl">{pokeName}'s details</h1>
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <div>
-          <img
-            src={pokeDetails.sprites.other["official-artwork"].front_default}
-          />
+        <div className="">
+          <div className="flex flex-row">
+            <img
+              className=" h-80"
+              src={pokeDetails.sprites.other["official-artwork"].front_default}
+            />
+            <img
+              className=" h-80"
+              src={pokeDetails.sprites.other["official-artwork"].front_shiny}
+            />
+          </div>
           {/* <img
             src={pokeDetails.sprites.other["official-artwork"].front_shiny}
           /> */}
           <h3>Height: {pokeDetails.height}</h3>
           <h3>Weight: {pokeDetails.weight}</h3>
-          <h3>Type:</h3>
-          <ul>
+          <h3 className="text-3xl">Type:</h3>
+          <ul className="flex flex-col">
             {pokeDetails.types.map((type) => (
               <li key={type.slot}>{type.type.name}</li>
             ))}
           </ul>
-          <h3>Abilities:</h3>
-          <ul>
+          <h3 className="text-3xl">Abilities:</h3>
+          <ul className="flex flex-col">
             {pokeDetails.abilities.map((ability) => (
               <li key={ability.slot}>{ability.ability.name}</li>
             ))}
