@@ -11,11 +11,13 @@
 }
 .custom_font {
   font-family: 'Chakra Petch', sans-serif;
+  color: #001d3d;
 }
 
 html {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
+  background-color:#fdf0d5;
 }
 
 p {

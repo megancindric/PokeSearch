@@ -2,8 +2,10 @@ import React from "react";
 
 const HomePage = () => {
   return (
-    <div className="container">
-      <h1>Home Page!</h1>
+    <div className="flex justify-center items-center">
+      <h1 className=" text-5xl font-bold text-[#001d3d]">
+        Welcome to the PokeSearch Database!
+      </h1>
     </div>
   );
 };

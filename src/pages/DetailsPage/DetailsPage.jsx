@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
 const DetailsPage = ({ Dex }) => {
   const { pokeName } = useParams();
   const [pokeDetails, setPokeDetails] = useState({});
@@ -27,29 +26,27 @@ const DetailsPage = ({ Dex }) => {
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        <div className="">
+        <div className="flex flex-col gap-5">
           <div className="flex flex-row">
             <img
+              alt={`Front sprite of ${pokeName}`}
               className=" h-80"
               src={pokeDetails.sprites.other["official-artwork"].front_default}
             />
             <img
+              alt={`Shiny front sprite of ${pokeName}`}
               className=" h-80"
               src={pokeDetails.sprites.other["official-artwork"].front_shiny}
             />
           </div>
-          {/* <img
-            src={pokeDetails.sprites.other["official-artwork"].front_shiny}
-          /> */}
-
-          <h3>Height: {pokeDetails.height}</h3>
-          <h3>Weight: {pokeDetails.weight}</h3>
-          <h3 className="text-3xl">Type:</h3>
+          <div></div> <h3 className="text-3xl">Type:</h3>
           <ul className="flex flex-col">
             {pokeDetails.types.map((type) => (
               <li key={type.slot}>{type.type.name}</li>
             ))}
           </ul>
+          <h3>Height: {pokeDetails.height}</h3>
+          <h3>Weight: {pokeDetails.weight}</h3>
           <h3 className="text-3xl">Abilities:</h3>
           <ul className="flex flex-col">
             {pokeDetails.abilities.map((ability) => (
