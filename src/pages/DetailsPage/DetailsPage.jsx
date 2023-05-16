@@ -6,7 +6,7 @@ const DetailsPage = ({ Dex }) => {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     fetchPokemonDetails();
-  }, [fetchPokemonDetails]);
+  }, []);
   const fetchPokemonDetails = async () => {
     try {
       //Make axios request

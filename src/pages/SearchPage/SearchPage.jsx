@@ -36,7 +36,7 @@ const SearchPage = ({ Dex }) => {
   };
   useEffect(() => {
     getAllPokemon();
-  }, [getAllPokemon]);
+  }, []);
 
   return (
     <div className="container search font-bold">
