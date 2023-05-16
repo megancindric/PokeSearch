@@ -22,13 +22,17 @@ pipeline {
 
         stage("Docker"){
             steps {
-
                 script {
                     def dockerTool = tool name: 'docker-latest-tool', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
                     env.PATH = "${dockerTool}/bin:${env.PATH}"
                 }
-                sh "echo 'Dockerizing the Application...'"
-                sh 'docker --version'
+                sh '''
+                echo 'Dockerizing the Application...'
+                docker --version
+                docker images
+                docker build -t megancindric/pokesearch:latest
+                docker images
+                '''
             }
         }
 
