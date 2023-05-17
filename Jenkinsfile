@@ -33,7 +33,7 @@ pipeline {
         }
         stage("Push Docker Image"){
             steps {
-                sh 'Pushing to Docker Hub...'
+                sh 'echo "Pushing to Docker Hub..."'
                 // Access Personal Docker Credentials
                 // Use them to log in to docker through login CLI command
 
@@ -44,7 +44,7 @@ pipeline {
 
         stage("Deploy to EC2"){
             steps {
-                sh 'Deploying to EC2 instance...'
+                sh 'echo "Deploying to EC2 instance..."'
             }
             // SSH into remote server
             // Shut down current running image
