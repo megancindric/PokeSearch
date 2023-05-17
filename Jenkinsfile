@@ -34,11 +34,11 @@ pipeline {
         stage("Push Docker Image"){
             steps {
                 sh 'echo "Pushing to Docker Hub..."'
-                // Access Personal Docker Credentials
-                // Use them to log in to docker through login CLI command
-
-                // docker login username password
-                // push image
+                withCredentials([usernamePassword(credentialsId: 'personal-docker-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    sh "echo ${DOCKER_USERNAME}"
+                    sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                    sh "docker push megancindric/pokesearch:latest"
+                }
             }
         }
 
