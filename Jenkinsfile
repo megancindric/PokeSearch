@@ -43,6 +43,9 @@ pipeline {
         }
 
         stage("Deploy to EC2"){
+            steps {
+                sh 'Deploying to EC2 instance...'
+            }
             // SSH into remote server
             // Shut down current running image
             // Pull new image that was pushed
