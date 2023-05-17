@@ -30,7 +30,7 @@ pipeline {
                 echo 'Dockerizing the Application...'
                 docker --version
                 docker images
-                docker build -t megancindric/pokesearch:latest
+                docker build -t megancindric/pokesearch:latest .
                 docker images
                 '''
             }
