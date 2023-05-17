@@ -2,38 +2,51 @@ pipeline {
 
     agent any
 
+    environment {
+        def nodejsTool = tool name: 'node-20-tool', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+        def dockerTool = tool name: 'docker-latest-tool', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
+        path = "${nodejsTool}/bin:${dockerTool}/bin:${env.PATH}"
+    }
+
     stages {
 
-        stage("Build"){
+        stage("Install Dependencies"){
             steps {
-
-                script {
-                    def nodejsTool = tool name: 'node-20-tool', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
-                    env.PATH = "${nodejsTool}/bin:${env.PATH}"
-                }
-
-                sh '''
-                    echo 'Building the Application...'
-                    npm install
-                    npm run-script build
-                '''
+                sh 'npm install'
             }
         }
 
-        stage("Docker"){
+        stage("Create Production Build"){
             steps {
-                script {
-                    def dockerTool = tool name: 'docker-latest-tool', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
-                    env.PATH = "${dockerTool}/bin:${env.PATH}"
-                }
+                sh 'npm run-script build'
+            }
+        }
+
+        stage("Build Docker Image"){
+            steps {
                 sh '''
-                echo 'Dockerizing the Application...'
-                docker --version
-                docker images
-                docker build -t megancindric/pokesearch:latest .
-                docker images
+                    docker images
+                    docker build -t megancindric/pokesearch:latest .
+                    docker images
                 '''
             }
+        }
+        stage("Push Docker Image"){
+            steps {
+                sh 'Pushing to Docker Hub...'
+                // Access Personal Docker Credentials
+                // Use them to log in to docker through login CLI command
+
+                // docker login username password
+                // push image
+            }
+        }
+
+        stage("Deploy to EC2"){
+            // SSH into remote server
+            // Shut down current running image
+            // Pull new image that was pushed
+            // Launch new image onto remote server
         }
 
 
