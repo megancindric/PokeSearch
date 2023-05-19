@@ -39,26 +39,44 @@ const DetailsPage = ({ Dex }) => {
               src={pokeDetails.sprites.other["official-artwork"].front_shiny}
             />
           </div>
-          <div></div> <h3 className="text-3xl">Type:</h3>
-          <ul className="flex flex-col">
-            {pokeDetails.types.map((type) => (
-              <li key={type.slot}>{type.type.name}</li>
-            ))}
-          </ul>
-          <h3>Height: {pokeDetails.height}</h3>
-          <h3>Weight: {pokeDetails.weight}</h3>
-          <h3 className="text-3xl">Abilities:</h3>
-          <ul className="flex flex-col">
-            {pokeDetails.abilities.map((ability) => (
-              <li key={ability.slot}>{ability.ability.name}</li>
-            ))}
-          </ul>
-          <h3 className="text-3xl">Moves:</h3>
-          <ul className="flex flex-col">
-            {pokeDetails.moves.map((move, index) => (
-              <li key={index}>{move.move.name}</li>
-            ))}
-          </ul>
+          <div className="flex flex-row justify-around">
+            <div className="flex flex-col justify-center items-center">
+              <h3 className=" text-3xl">Height:</h3>
+              <p>{pokeDetails.height / 10} m</p>
+            </div>
+            <div className="flex flex-col justify-center items-center ">
+              <h3 className="text-3xl">Weight:</h3>
+              <p>{pokeDetails.weight / 10} kg</p>
+            </div>
+          </div>
+          <div className="flex flex-row justify-around">
+            <div className="flex flex-col items-center justify-center">
+              <h3 className="text-3xl">Type:</h3>
+              <ul className="flex flex-col">
+                {pokeDetails.types.map((type) => (
+                  <li key={type.slot}>{type.type.name}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex flex-col items-center justify-center">
+              <h3 className="text-3xl">Abilities:</h3>
+              <ul className="flex flex-col">
+                {pokeDetails.abilities.map((ability) => (
+                  <li key={ability.slot}>{ability.ability.name}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="flex flex-col justify-center items-center">
+            <h3 className="text-3xl">Moves:</h3>
+            <ul className="flex flex-col flex-wrap ">
+              {pokeDetails.moves.map((move, index) => (
+                <li key={index} className="p-2">
+                  {move.move.name}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       )}
     </div>
