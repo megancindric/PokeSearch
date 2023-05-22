@@ -64,7 +64,7 @@ pipeline {
                     sh """
                         SSH_COMMAND="ssh -o StrictHostKeyChecking=no ubuntu@18.234.103.198"
                         \$SSH_COMMAND "docker pull megancindric/pokesearch:$BUILD_NUMBER"
-                        \$SSH_COMMAND "docker run -d -p 80:80 --name poke-search-hosted megancindric/pokesearch:$BUILD_NUMBER"
+                        \$SSH_COMMAND "docker run -d -p 80:80 --name poke-search-hosted1 megancindric/pokesearch:$BUILD_NUMBER"
                     """
                 }
             }
