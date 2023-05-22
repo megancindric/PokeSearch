@@ -50,7 +50,7 @@ pipeline {
 
                 sshagent(['poke-search-ubuntu-kp-ssh-credentials']) {
                     script {
-                        def containerDoesExist = = sh(returnStdout: true, script: "ssh -o StrictHostKeyChecking=no ubuntu@18.234.103.198 \"docker ps -aqf 'name=poke-search-hosted'\"").trim()
+                        def containerDoesExist = sh(returnStdout: true, script: "ssh -o StrictHostKeyChecking=no ubuntu@18.234.103.198 \"docker ps -aqf 'name=poke-search-hosted'\"").trim()
                         if (containerDoesExist){
                             sh "ssh -o StrictHostKeyChecking=no ubuntu@18.234.103.198 \"docker stop poke-search-hosted && docker rm poke-search-hosted\""
                         }
