@@ -51,20 +51,21 @@ pipeline {
                 sshagent(['poke-search-ubuntu-kp-ssh-credentials']) {
                     script {
                         // Conditionally checking if container "poke-search-hosted" exists within the Docker container
-                        def containerDoesExist = sh(returnStdout: true, script: "ssh -o StrictHostKeyChecking=no ubuntu@18.234.103.198 \"docker ps -aqf 'name=poke-search-hosted1'\"").trim()
+                        def containerName = "poke-search-hosted"
+                        def containerDoesExist = sh(returnStdout: true, script: "ssh -o StrictHostKeyChecking=no ubuntu@18.234.103.198 \"docker ps -aqf 'name=${containerName}'\"").trim()
                         // If a container matching the name exists, remove it.  Otherwise echo no match found, and continue with deployment
                         if (containerDoesExist){
-                            echo "Container poke-search-hosted located.  Removing container..."
-                            sh "ssh -o StrictHostKeyChecking=no ubuntu@18.234.103.198 \"docker stop poke-search-hosted1 && docker rm poke-search-hosted1\""
+                            echo "Container ${containerName} located.  Removing container..."
+                            sh "ssh -o StrictHostKeyChecking=no ubuntu@18.234.103.198 \"docker stop ${containerName} && docker rm ${containerName}\""
                         }
                         else {
-                            echo "No container found matching poke-search-hosted1"
+                            echo "No container found matching ${containerName}"
                         }
                     }
                     sh """
                         SSH_COMMAND="ssh -o StrictHostKeyChecking=no ubuntu@18.234.103.198"
                         \$SSH_COMMAND "docker pull megancindric/pokesearch:$BUILD_NUMBER"
-                        \$SSH_COMMAND "docker run -d -p 80:80 --name poke-search-hosted1 megancindric/pokesearch:$BUILD_NUMBER"
+                        \$SSH_COMMAND "docker run -d -p 80:80 --name poke-search-hosted megancindric/pokesearch:$BUILD_NUMBER"
                     """
                 }
             }
